@@ -1,0 +1,69 @@
+name: Time Dashboard
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/5 * * * *'
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: time-dashboard
+  cancel-in-progress: false
+
+jobs:
+  refresh-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Pull Discord time captures
+        env:
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          DISCORD_TIME_CHANNEL_IDS: ${{ secrets.DISCORD_TIME_CHANNEL_IDS }}
+        run: |
+          python3 system/scripts/integrations/discord_inbox_pull.py \
+            --channel-ids "$DISCORD_TIME_CHANNEL_IDS" \
+            --inbox-dir inbox/time \
+            --state-file inbox/time/.discord_time_pull_state.json \
+            --allow-bots \
+            --limit 50 \
+            --once
+
+      - name: Generate dashboard
+        run: |
+          python3 system/scripts/integrations/time_tracker_sync.py \
+            --inbox-dir inbox/time \
+            --time-dir life/worklog \
+            --sync
+
+      - name: Commit refreshed data
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add inbox/time life/worklog/data life/worklog/time_dashboard.md life/worklog/site
+          if git diff --cached --quiet; then
+            echo 'No data changes to commit.'
+          else
+            git commit -m 'Refresh time dashboard'
+            git push
+          fi
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: life/worklog/site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

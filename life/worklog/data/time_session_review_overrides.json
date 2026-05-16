@@ -1,0 +1,51 @@
+{
+  "description": "Session status overrides applied after parsing raw Discord captures. reviewed sessions are cleared from Review Flags and remain excluded from counted totals.",
+  "updated": "2026-05-16T01:00:00+08:00",
+  "sessions": {
+    "2026-04-28T10:35:26+08:00|1498512941597851680": {
+      "status": "reviewed",
+      "note": "review_cleared_2026-05-16",
+      "original_status": "needs_review",
+      "original_notes": "closed_by_next_start",
+      "duration_min": "3059",
+      "category": "course",
+      "label": ""
+    },
+    "2026-05-03T23:04:36+08:00|1500513416295485500": {
+      "status": "reviewed",
+      "note": "review_cleared_2026-05-16",
+      "original_status": "needs_review",
+      "original_notes": "duration_over_3h",
+      "duration_min": "190",
+      "category": "course",
+      "label": "看ppt"
+    },
+    "2026-05-04T12:36:10+08:00|1500717652791005494": {
+      "status": "reviewed",
+      "note": "review_cleared_2026-05-16",
+      "original_status": "needs_review",
+      "original_notes": "closed_by_next_start",
+      "duration_min": "662",
+      "category": "course",
+      "label": ""
+    },
+    "2026-05-14T13:11:12+08:00|1504350347357851649": {
+      "status": "reviewed",
+      "note": "review_cleared_2026-05-16",
+      "original_status": "needs_review",
+      "original_notes": "closed_by_next_start",
+      "duration_min": "247",
+      "category": "course",
+      "label": ""
+    },
+    "2026-05-14T21:37:18+08:00|1504477711068954685": {
+      "status": "reviewed",
+      "note": "review_cleared_2026-05-16",
+      "original_status": "needs_review",
+      "original_notes": "closed_by_next_start",
+      "duration_min": "107",
+      "category": "language",
+      "label": ""
+    }
+  }
+}
