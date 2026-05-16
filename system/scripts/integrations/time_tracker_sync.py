@@ -873,6 +873,70 @@ def render_line_chart(title: str, points: list[tuple[str, int]], color: str = "#
     )
 
 
+def render_day_24h(title: str, sessions: list[Session], day: datetime, now: datetime) -> str:
+    day_start = day.replace(hour=0, minute=0, second=0, microsecond=0)
+    day_end = day_start + timedelta(days=1)
+    rows = []
+    total_by_hour = [0 for _ in range(24)]
+    items = []
+    for session in sessions:
+        if session.category not in WORK_CATEGORY_ORDER:
+            continue
+        if session.status not in {"ok", "open"}:
+            continue
+        start = max(session.start, day_start)
+        end_source = session.end or now
+        end = min(end_source, day_end)
+        if end <= day_start or start >= day_end or end <= start:
+            continue
+        start_min = int((start - day_start).total_seconds() // 60)
+        end_min = int((end - day_start).total_seconds() // 60)
+        items.append((start_min, end_min, session))
+        for hour in range(start_min // 60, min(23, (max(end_min - 1, 0)) // 60) + 1):
+            hour_start = hour * 60
+            hour_end = hour_start + 60
+            total_by_hour[hour] += max(0, min(end_min, hour_end) - max(start_min, hour_start))
+
+    for hour in range(24):
+        hour_start = hour * 60
+        parts = []
+        for start_min, end_min, session in items:
+            overlap_start = max(start_min, hour_start)
+            overlap_end = min(end_min, hour_start + 60)
+            if overlap_end <= overlap_start:
+                continue
+            left = (overlap_start - hour_start) / 60 * 100
+            width = max(1.5, (overlap_end - overlap_start) / 60 * 100)
+            color = CATEGORY_COLORS.get(session.category, CATEGORY_COLORS["other"])
+            label = CATEGORY_LABELS.get(session.category, session.category)
+            status_class = " open" if session.status == "open" else ""
+            tip = (
+                f"{fmt_duration(overlap_end - overlap_start)} · {label}"
+                f"{' · ' + session.label if session.label else ''}"
+                f"{' · open' if session.status == 'open' else ''}"
+            )
+            parts.append(
+                f"<i class=\"day24-segment{status_class}\" title=\"{html_escape(tip)}\" "
+                f"style=\"left:{left:.2f}%;width:{width:.2f}%;background:{color}\"></i>"
+            )
+        rows.append(
+            "<div class=\"day24-row\">"
+            f"<span>{hour:02d}:00</span>"
+            f"<div class=\"day24-track\">{''.join(parts)}</div>"
+            f"<strong>{fmt_duration(total_by_hour[hour])}</strong>"
+            "</div>"
+        )
+
+    total = sum(total_by_hour)
+    subtitle = f"{day_start.date().isoformat()} · {fmt_duration(total)}"
+    return (
+        f"<section><h3>{html_escape(title)}</h3>"
+        f"<div class=\"day24\"><div class=\"day24-head\"><span>{html_escape(subtitle)}</span>"
+        "<span>00-24</span></div>"
+        f"{''.join(rows)}</div></section>"
+    )
+
+
 def render_pie(title: str, totals: dict[str, int], labels: dict[str, str]) -> str:
     rows = [(category, total) for category, total in totals.items() if total > 0]
     total = sum(value for _, value in rows)
@@ -1242,6 +1306,15 @@ def generate_dashboard_site(sessions: list[Session], worklog_dir: Path) -> None:
     .month-cell {{ min-height:66px; padding:7px; background:var(--panel); border:1px solid var(--line); border-bottom:4px solid; border-radius:8px; }}
     .month-cell span,.month-cell small {{ display:block; color:var(--muted); font-size:11px; }}
     .month-cell strong {{ display:block; margin:4px 0 2px; font-size:14px; }}
+    .day24 {{ display:grid; gap:4px; background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:10px; }}
+    .day24-head,.day24-row {{ display:grid; grid-template-columns:48px minmax(0,1fr) 54px; gap:8px; align-items:center; }}
+    .day24-head {{ color:var(--muted); font-size:12px; font-weight:700; }}
+    .day24-head span:first-child {{ grid-column:1 / 3; }}
+    .day24-row span {{ color:var(--muted); font-size:12px; font-variant-numeric:tabular-nums; }}
+    .day24-row strong {{ text-align:right; font-size:12px; font-variant-numeric:tabular-nums; }}
+    .day24-track {{ position:relative; height:14px; border:1px solid var(--line); border-radius:999px; background:color-mix(in srgb, var(--panel) 72%, var(--line)); overflow:hidden; }}
+    .day24-segment {{ position:absolute; top:0; bottom:0; border-radius:999px; min-width:2px; }}
+    .day24-segment.open {{ background-image:repeating-linear-gradient(45deg, rgba(255,255,255,.28) 0 5px, transparent 5px 10px); }}
     .empty {{ color:var(--muted); background:var(--panel); border:1px dashed var(--line); border-radius:8px; padding:14px; }}
     footer {{ color:var(--muted); border-top:1px solid var(--line); margin-top:32px; }}
     @media (max-width:760px) {{
@@ -1267,7 +1340,7 @@ def generate_dashboard_site(sessions: list[Session], worklog_dir: Path) -> None:
       ("Target", f"{fmt_duration(today_minutes)} / {fmt_duration(STUDY_TARGET_DAILY_MIN)}"),
       ("Sessions", str((today or {}).get("work_session_count") or 0)),
       ("Longest", fmt_duration((today or {}).get("work_longest_session_min") or 0)),
-  ])}</section>
+  ])}{render_day_24h("Today 24h", sessions, now, now)}</section>
   <section id="weekly"><h2>Weekly</h2>{render_cards([
       ("7 Days", fmt_duration(week_total)),
       ("Target", f"{fmt_duration(week_total)} / {fmt_duration(STUDY_TARGET_WEEKLY_MIN)}"),
