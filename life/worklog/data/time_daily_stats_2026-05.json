@@ -449,19 +449,19 @@
     },
     {
       "date": "2026-05-16",
-      "total_min": 92,
-      "session_count": 1,
-      "work_session_count": 1,
+      "total_min": 119,
+      "session_count": 2,
+      "work_session_count": 2,
       "first_start_min": 794,
-      "last_end_min": 885,
+      "last_end_min": 966,
       "longest_session_min": 92,
       "work_first_start_min": 794,
-      "work_last_end_min": 885,
+      "work_last_end_min": 966,
       "work_longest_session_min": 92,
       "main_category": "course",
       "by_category": {
         "admin": 0,
-        "course": 92,
+        "course": 119,
         "entertainment": 0,
         "language": 0,
         "leetcode": 0,
@@ -471,10 +471,11 @@
         "self_study": 0
       },
       "status": {
-        "ok": 1
+        "ok": 2
       },
       "labels": {
-        "Memory hw3 寫完 7成": 92
+        "Memory hw3 寫完 7成": 92,
+        "Hw3 剩 最後確認和繳交": 27
       }
     },
     {
