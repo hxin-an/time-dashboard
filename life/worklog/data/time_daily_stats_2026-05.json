@@ -480,16 +480,16 @@
     },
     {
       "date": "2026-05-17",
-      "total_min": 0,
-      "session_count": 0,
-      "work_session_count": 0,
-      "first_start_min": null,
-      "last_end_min": null,
-      "longest_session_min": 0,
-      "work_first_start_min": null,
-      "work_last_end_min": null,
-      "work_longest_session_min": 0,
-      "main_category": "",
+      "total_min": 36,
+      "session_count": 1,
+      "work_session_count": 1,
+      "first_start_min": 706,
+      "last_end_min": 742,
+      "longest_session_min": 36,
+      "work_first_start_min": 706,
+      "work_last_end_min": 742,
+      "work_longest_session_min": 36,
+      "main_category": "research",
       "by_category": {
         "admin": 0,
         "course": 0,
@@ -497,12 +497,16 @@
         "language": 0,
         "leetcode": 0,
         "other": 0,
-        "research": 0,
+        "research": 36,
         "rest": 0,
         "self_study": 0
       },
-      "status": {},
-      "labels": {}
+      "status": {
+        "ok": 1
+      },
+      "labels": {
+        "開始做報告": 36
+      }
     },
     {
       "date": "2026-05-18",
