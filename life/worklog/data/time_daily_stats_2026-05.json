@@ -480,32 +480,34 @@
     },
     {
       "date": "2026-05-17",
-      "total_min": 36,
-      "session_count": 1,
-      "work_session_count": 1,
+      "total_min": 124,
+      "session_count": 3,
+      "work_session_count": 3,
       "first_start_min": 706,
-      "last_end_min": 742,
-      "longest_session_min": 36,
+      "last_end_min": 935,
+      "longest_session_min": 52,
       "work_first_start_min": 706,
-      "work_last_end_min": 742,
-      "work_longest_session_min": 36,
+      "work_last_end_min": 935,
+      "work_longest_session_min": 52,
       "main_category": "research",
       "by_category": {
         "admin": 0,
-        "course": 0,
+        "course": 52,
         "entertainment": 0,
         "language": 0,
         "leetcode": 0,
         "other": 0,
-        "research": 36,
+        "research": 72,
         "rest": 0,
         "self_study": 0
       },
       "status": {
-        "ok": 1
+        "ok": 3
       },
       "labels": {
-        "開始做報告": 36
+        "繼續做報告": 52,
+        "開始做報告": 36,
+        "看完論文": 36
       }
     },
     {

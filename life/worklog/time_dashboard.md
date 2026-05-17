@@ -1,6 +1,6 @@
 # Time Dashboard
 
-Updated: 2026-05-17T13:06:41+08:00
+Updated: 2026-05-17T15:40:36+08:00
 
 This dashboard is evidence for weekly journal review. It describes work time allocation; rest, entertainment, open sessions, and sessions needing review are excluded from totals, charts, and rankings.
 
@@ -45,10 +45,7 @@ This dashboard is evidence for weekly journal review. It describes work time all
 
 ## Current Session
 
-- category: 研究
-- label: 
-- started: 2026-05-17T12:44:37+08:00
-- duration_so_far: 22m
+None
 
 ## Daily Overview
 
@@ -652,7 +649,7 @@ rankGrid([
 <table class="worklog-review-table">
 <thead><tr><th>Date</th><th>Start</th><th>End</th><th>Duration</th><th>Category</th><th>Label</th><th>Status</th></tr></thead>
 <tbody>
-<tr><td>2026-05-17</td><td>12:44</td><td></td><td class="num">open</td><td>研究</td><td></td><td>open</td></tr>
+<tr><td colspan="7" class="empty">None</td></tr>
 </tbody>
 </table>
 
