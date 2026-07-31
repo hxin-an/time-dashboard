@@ -1,6 +1,6 @@
 # Time Dashboard
 
-Updated: 2026-07-31T22:22:39+08:00
+Updated: 2026-08-01T00:13:57+08:00
 
 This dashboard is evidence for weekly journal review. It describes work time allocation; rest, entertainment, open sessions, and sessions needing review are excluded from totals, charts, and rankings.
 
@@ -53,11 +53,11 @@ None
 
 
 ```dataviewjs
-const raw = await dv.io.load("life/worklog/data/time_daily_stats_2026-07.json");
+const raw = await dv.io.load("life/worklog/data/time_daily_stats_2026-08.json");
 const data = JSON.parse(raw);
 let prevData = {days: []};
 try {
-  const prevRaw = await dv.io.load("life/worklog/data/time_daily_stats_2026-06.json");
+  const prevRaw = await dv.io.load("life/worklog/data/time_daily_stats_2026-07.json");
   prevData = JSON.parse(prevRaw);
 } catch (e) {}
 const view = "daily";
@@ -163,11 +163,11 @@ if(view==="trend"){
 
 
 ```dataviewjs
-const raw = await dv.io.load("life/worklog/data/time_daily_stats_2026-07.json");
+const raw = await dv.io.load("life/worklog/data/time_daily_stats_2026-08.json");
 const data = JSON.parse(raw);
 let prevData = {days: []};
 try {
-  const prevRaw = await dv.io.load("life/worklog/data/time_daily_stats_2026-06.json");
+  const prevRaw = await dv.io.load("life/worklog/data/time_daily_stats_2026-07.json");
   prevData = JSON.parse(prevRaw);
 } catch (e) {}
 const view = "weekly";
@@ -273,11 +273,11 @@ if(view==="trend"){
 
 
 ```dataviewjs
-const raw = await dv.io.load("life/worklog/data/time_daily_stats_2026-07.json");
+const raw = await dv.io.load("life/worklog/data/time_daily_stats_2026-08.json");
 const data = JSON.parse(raw);
 let prevData = {days: []};
 try {
-  const prevRaw = await dv.io.load("life/worklog/data/time_daily_stats_2026-06.json");
+  const prevRaw = await dv.io.load("life/worklog/data/time_daily_stats_2026-07.json");
   prevData = JSON.parse(prevRaw);
 } catch (e) {}
 const view = "monthly";
@@ -381,16 +381,16 @@ if(view==="trend"){
 
 近 14 天、本月累積曲線、排名、開始 / 結束時間。
 
-Month: 2026-07  
+Month: 2026-08  
 Week: 2026-07-27 to 2026-08-02
 
 
 ```dataviewjs
-const raw = await dv.io.load("life/worklog/data/time_daily_stats_2026-07.json");
+const raw = await dv.io.load("life/worklog/data/time_daily_stats_2026-08.json");
 const data = JSON.parse(raw);
 let prevData = {days: []};
 try {
-  const prevRaw = await dv.io.load("life/worklog/data/time_daily_stats_2026-06.json");
+  const prevRaw = await dv.io.load("life/worklog/data/time_daily_stats_2026-07.json");
   prevData = JSON.parse(prevRaw);
 } catch (e) {}
 const view = "trend";
@@ -496,7 +496,7 @@ if(view==="trend"){
 
 
 ```dataviewjs
-const months = ["2026-03", "2026-04", "2026-05", "2026-06", "2026-07"];
+const months = ["2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08"];
 const view = "year";
 const targetYear = "2026";
 const cats = ["course", "research", "self_study", "language", "leetcode", "admin", "other"];
@@ -572,7 +572,7 @@ rankGrid([
 
 
 ```dataviewjs
-const months = ["2026-03", "2026-04", "2026-05", "2026-06", "2026-07"];
+const months = ["2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08"];
 const view = "total";
 const targetYear = "2026";
 const cats = ["course", "research", "self_study", "language", "leetcode", "admin", "other"];
