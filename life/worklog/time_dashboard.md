@@ -1,6 +1,6 @@
 # Time Dashboard
 
-Updated: 2026-08-03T14:47:23+08:00
+Updated: 2026-08-03T18:27:12+08:00
 
 This dashboard is evidence for weekly journal review. It describes work time allocation; rest, entertainment, open sessions, and sessions needing review are excluded from totals, charts, and rankings.
 
