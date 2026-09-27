@@ -1,6 +1,6 @@
 # Time Dashboard
 
-Updated: 2026-09-27T23:18:13+08:00
+Updated: 2026-09-28T02:59:44+08:00
 
 This dashboard is evidence for weekly journal review. It describes work time allocation; rest, entertainment, open sessions, and sessions needing review are excluded from totals, charts, and rankings.
 
@@ -382,7 +382,7 @@ if(view==="trend"){
 近 14 天、本月累積曲線、排名、開始 / 結束時間。
 
 Month: 2026-09  
-Week: 2026-09-21 to 2026-09-27
+Week: 2026-09-28 to 2026-10-04
 
 
 ```dataviewjs
